@@ -11,7 +11,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "DataPulse – API-First Form Tracking",
-  description: "Universal website form data tracking platform.",
+  description: "Universal form backend with real-time analytics and premium design.",
 };
 
 export default function RootLayout({
