@@ -55,14 +55,41 @@ npm run dev
 
 ## 🚢 Deployment
 
-### Frontend (Netlify)
-1. Import your repository to **Netlify**.
-2. Netlify will auto-detect the `netlify.toml` configuration.
-3. Ensure the base directory is set to `client`.
-4. The build command is `npm run build` and the publish directory is `.next`.
+**📖 For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md)**
 
-### Backend
-Deploy the `server` directory to platform like **Render** or **Railway**. Ensure you set your `DATABASE_URL` environment variables.
+### Quick Overview
+
+#### Frontend (Vercel)
+1. Import repository to [Vercel](https://vercel.com)
+2. Set root directory to `client`
+3. Add environment variable:
+   - `NEXT_PUBLIC_API_URL` = Your backend URL
+4. Deploy
+
+#### Backend (Render or Railway)
+1. Deploy `server` directory to [Render](https://render.com) or [Railway](https://railway.app)
+2. Add PostgreSQL database
+3. Set environment variables:
+   - `DATABASE_URL` = PostgreSQL connection string
+   - `JWT_SECRET` = Random 32-character string
+   - `FRONTEND_URL` = Your Vercel URL
+   - `NODE_ENV` = production
+4. Deploy
+
+### Environment Variables
+
+**Client (.env.local)**:
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:4000
+```
+
+**Server (.env)**:
+```bash
+DATABASE_URL=postgresql://user:password@localhost:5432/datapulse
+JWT_SECRET=your-secret-key
+FRONTEND_URL=http://localhost:3000
+NODE_ENV=development
+```
 
 ---
 

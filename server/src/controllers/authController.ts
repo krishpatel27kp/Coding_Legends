@@ -1,9 +1,7 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../lib/prisma';
 import { generateToken, hashPassword, comparePassword } from '../utils/auth';
 import { z } from 'zod';
-
-const prisma = new PrismaClient();
 
 const registerSchema = z.object({
     email: z.string().email(),
@@ -32,6 +30,7 @@ export const register = async (req: Request, res: Response) => {
         const token = generateToken(user.id);
         res.status(201).json({ token, user: { id: user.id, email: user.email } });
     } catch (error) {
+        console.error('Registration error:', error);
         if (error instanceof z.ZodError) {
             return res.status(400).json({ error: error.issues });
         }
@@ -56,6 +55,7 @@ export const login = async (req: Request, res: Response) => {
         const token = generateToken(user.id);
         res.json({ token, user: { id: user.id, email: user.email } });
     } catch (error) {
+        console.error('Login error:', error);
         if (error instanceof z.ZodError) {
             return res.status(400).json({ error: error.issues });
         }

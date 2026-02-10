@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { Plus, Search, MoreVertical, FileText, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { API_ENDPOINTS } from '@/lib/config';
 
 export default function ProjectsPage() {
     const { token } = useAuth();
@@ -19,7 +20,7 @@ export default function ProjectsPage() {
 
     useEffect(() => {
         if (token) {
-            axios.get('http://localhost:4000/api/projects', {
+            axios.get(API_ENDPOINTS.projects, {
                 headers: { Authorization: `Bearer ${token}` }
             }).then(res => {
                 setProjects(res.data);

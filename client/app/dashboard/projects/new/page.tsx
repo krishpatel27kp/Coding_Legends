@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { API_ENDPOINTS } from '@/lib/config';
 
 export default function NewProjectPage() {
     const { token } = useAuth();
@@ -22,7 +23,7 @@ export default function NewProjectPage() {
         setLoading(true);
         try {
             await axios.post(
-                'http://localhost:4000/api/projects',
+                API_ENDPOINTS.projects,
                 { name },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

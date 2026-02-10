@@ -34,6 +34,16 @@
     "verbatimModuleSyntax": false,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
-  }
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test-email.ts",
+    "verify-recipient.ts",
+    "checkAll.js",
+    "checkProject.js",
+    "checkUser.js",
+    "updateEmail.js"
+  ]
 }

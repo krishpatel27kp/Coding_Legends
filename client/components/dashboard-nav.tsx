@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { LayoutDashboard, FileText, Settings, Database, Download } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const items = [
     {
@@ -45,11 +46,23 @@ export function DashboardNav() {
                         key={index}
                         href={item.href}
                         className={cn(
-                            'group flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors',
-                            pathname === item.href ? 'bg-primary/10 text-primary' : 'text-muted-foreground'
+                            'group relative flex items-center rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 ease-out',
+                            pathname === item.href
+                                ? 'bg-primary/10 text-primary shadow-[inset_0_0_0_1px_rgba(var(--primary),0.1)]'
+                                : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
                         )}
                     >
-                        <Icon className={cn("mr-2 h-4 w-4", pathname === item.href ? "text-primary" : "text-muted-foreground group-hover:text-primary")} />
+                        {pathname === item.href && (
+                            <motion.div
+                                layoutId="active-pill"
+                                className="absolute left-0 w-1 h-5 bg-primary rounded-full"
+                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                            />
+                        )}
+                        <Icon className={cn(
+                            "mr-3 h-4 w-4 transition-colors duration-200",
+                            pathname === item.href ? "text-primary" : "text-muted-foreground group-hover:text-primary"
+                        )} />
                         <span>{item.title}</span>
                     </Link>
                 );

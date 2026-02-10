@@ -11,6 +11,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { BarChart3, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { API_ENDPOINTS } from '@/lib/config';
 
 export default function RegisterPage() {
     const [email, setEmail] = useState('');
@@ -19,7 +20,7 @@ export default function RegisterPage() {
     const { login } = useAuth();
     const [loading, setLoading] = useState(false);
 
-    const API_URL = 'http://localhost:4000/api';
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -27,7 +28,7 @@ export default function RegisterPage() {
         setError('');
 
         try {
-            const res = await axios.post(`${API_URL}/auth/register`, { email, password });
+            const res = await axios.post(`${API_ENDPOINTS.auth}/register`, { email, password });
             login(res.data.token, res.data.user);
         } catch (err: any) {
             if (err.response?.data?.error && Array.isArray(err.response.data.error)) {

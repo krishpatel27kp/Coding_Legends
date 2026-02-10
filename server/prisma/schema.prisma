@@ -1,35 +1,86 @@
-datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 model User {
-  id        String    @id @default(uuid())
-  email     String    @unique
-  password  String
-  createdAt DateTime  @default(now())
-  projects  Project[]
+  id                     String    @id @default(uuid())
+  email                  String    @unique
+  password               String
+  notifyNewSubmissions   Boolean   @default(true)
+  notifyMonthlyAnalytics Boolean   @default(true)
+  unsubscribeAll         Boolean   @default(false)
+  createdAt              DateTime  @default(now())
+  projects               Project[]
 }
 
 model Project {
-  id          String       @id @default(uuid())
+  id          Int              @id @default(autoincrement())
   name        String
-  apiKey      String       @unique
-  user        User         @relation(fields: [userId], references: [id])
-  userId      String
-  submissions Submission[]
-  createdAt   DateTime     @default(now())
+  apiKey      String           @unique
+  userId         String
+  allowedOrigins Json     @default("[]")
+  formSchema     Json?    @default("[]")
+  webhookUrl     String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  user           User     @relation(fields: [userId], references: [id])
+  summaries      ProjectSummary[]
+  submissions    Submission[]
 }
 
 model Submission {
+  id          String              @id @default(uuid())
+  data        Json
+  metadata    Json?
+  projectId   Int
+  createdAt   DateTime            @default(now())
+  processed   Boolean             @default(false)
+  isDuplicate Boolean             @default(false)
+  duplicateOf String?
+  project     Project             @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  insights    SubmissionInsight[]
+  tags        SubmissionTag[]
+}
+
+model SubmissionTag {
+  id           String     @id @default(uuid())
+  submissionId String
+  tag          String
+  confidence   Float      @default(1.0)
+  createdAt    DateTime   @default(now())
+  submission   Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@index([submissionId])
+  @@index([tag])
+}
+
+model SubmissionInsight {
+  id           String     @id @default(uuid())
+  submissionId String
+  type         String
+  message      String
+  metadata     String?
+  createdAt    DateTime   @default(now())
+  submission   Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@index([submissionId])
+  @@index([type])
+}
+
+model ProjectSummary {
   id        String   @id @default(uuid())
-  data      String
-  metadata  String?
-  project   Project  @relation(fields: [projectId], references: [id])
-  projectId String
+  projectId Int
+  period    String
+  date      DateTime
+  summary   Json
   createdAt DateTime @default(now())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, period, date])
+  @@index([projectId, period])
 }
