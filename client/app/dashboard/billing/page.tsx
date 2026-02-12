@@ -60,10 +60,10 @@ export default function BillingPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
                     >
-                        <Card className={`relative h-full flex flex-col border-white/10 bg-card/30 backdrop-blur-xl ${plan.popular ? 'border-purple-500/50 shadow-[0_0_30px_-5px_rgba(168,85,247,0.2)]' : ''}`}>
+                        <Card className={`relative h-full flex flex-col border-white/10 bg-card/30 backdrop-blur-xl ${plan.popular ? 'border-purple-500/50 shadow-[0_0_30px_-5px_rgba(168,85,247,0.2)] z-10 scale-105' : 'hover:z-20'}`}>
                             {plan.popular && (
-                                <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2">
-                                    <Badge className="bg-purple-500 hover:bg-purple-600 text-white border-0 shadow-lg">Most Popular</Badge>
+                                <div className="absolute top-0 left-1/2 -translate-y-1/2 -translate-x-1/2 z-20">
+                                    <Badge className="bg-purple-500 hover:bg-purple-600 text-white border-0 shadow-2xl px-4 py-1.5 font-bold uppercase tracking-tighter text-[10px]">Most Popular</Badge>
                                 </div>
                             )}
                             <CardHeader>
