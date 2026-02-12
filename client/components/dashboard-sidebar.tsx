@@ -205,14 +205,13 @@ export function DashboardSidebar() {
                 )}
             </AnimatePresence>
 
-            {/* Mobile Toggle Button */}
             <Button
-                variant="outline"
+                variant="ghost"
                 size="icon"
-                className="fixed top-4 left-4 z-30 md:hidden bg-background/50 backdrop-blur"
+                className="fixed top-5 left-4 z-[100] md:hidden bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-xl rounded-xl"
                 onClick={() => setIsMobileOpen(true)}
             >
-                <Menu className="w-5 h-5" />
+                <Menu className="w-5 h-5 text-white" />
             </Button>
         </>
     );

@@ -7,6 +7,8 @@ import axios from 'axios';
 interface User {
     id: string;
     email: string;
+    name?: string | null;
+    organization?: string | null;
 }
 
 interface AuthContextType {

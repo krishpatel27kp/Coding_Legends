@@ -28,7 +28,16 @@ export const register = async (req: Request, res: Response) => {
         });
 
         const token = generateToken(user.id);
-        res.status(201).json({ token, user: { id: user.id, email: user.email } });
+        const userData = user as any;
+        res.status(201).json({
+            token,
+            user: {
+                id: userData.id,
+                email: userData.email,
+                name: userData.name,
+                organization: userData.organization
+            }
+        });
     } catch (error) {
         console.error('Registration error:', error);
         if (error instanceof z.ZodError) {
@@ -53,7 +62,16 @@ export const login = async (req: Request, res: Response) => {
         }
 
         const token = generateToken(user.id);
-        res.json({ token, user: { id: user.id, email: user.email } });
+        const userData = user as any;
+        res.json({
+            token,
+            user: {
+                id: userData.id,
+                email: userData.email,
+                name: userData.name,
+                organization: userData.organization
+            }
+        });
     } catch (error) {
         console.error('Login error:', error);
         if (error instanceof z.ZodError) {

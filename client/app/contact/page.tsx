@@ -46,7 +46,7 @@ export default function ContactPage() {
                         transition={{ duration: 0.6 }}
                     >
                         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8">
-                            Let's <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">Connect.</span>
+                            Let&apos;s <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">Connect.</span>
                         </h1>
                         <p className="text-xl text-muted-foreground/80 leading-relaxed mb-12 max-w-lg">
                             Have a question, feature request, or just want to say hi? Our team is ready to help you build better data workflows.
@@ -80,7 +80,7 @@ export default function ContactPage() {
                                             <Send className="h-8 w-8 text-green-500" />
                                         </div>
                                         <h3 className="text-2xl font-bold">Message Sent!</h3>
-                                        <p className="text-muted-foreground">We'll get back to you within 24 hours.</p>
+                                        <p className="text-muted-foreground">We&apos;ll get back to you within 24 hours.</p>
                                         <Button onClick={() => setStatus('idle')} variant="outline" className="rounded-full">Send another message</Button>
                                     </div>
                                 ) : (
@@ -121,7 +121,7 @@ export default function ContactPage() {
     );
 }
 
-function ContactMethod({ icon, title, description }: { icon: any, title: string, description: string }) {
+function ContactMethod({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
     return (
         <div className="flex items-center gap-4 group cursor-pointer p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
             <div className="h-12 w-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-purple-500/10 group-hover:border-purple-500/20 transition-all">

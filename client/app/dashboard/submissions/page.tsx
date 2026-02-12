@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/sheet";
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import InsightBadge from '@/components/insight-badge';
 import SmartFilters from '@/components/smart-filters';
 

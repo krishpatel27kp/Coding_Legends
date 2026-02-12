@@ -23,10 +23,12 @@ export function DashboardHeader() {
     const title = pathname.split('/').pop()?.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') || 'Overview';
 
     return (
-        <header className="sticky top-0 z-30 flex h-20 items-center justify-between gap-4 px-12 md:px-10 bg-background/60 backdrop-blur-xl border-b border-white/5 transition-all duration-300">
+        <header className="sticky top-0 z-30 flex h-20 items-center justify-between gap-4 pl-16 pr-6 md:px-10 bg-background/60 backdrop-blur-xl border-b border-white/5 transition-all duration-300">
             <div className="flex-1 min-w-0">
                 <h2 className="text-xl md:text-2xl font-bold tracking-tight capitalize text-white drop-shadow-lg truncate">{title}</h2>
-                <p className="text-muted-foreground text-xs md:text-sm hidden md:block">Welcome back, {user?.email?.split('@')[0]}</p>
+                <p className="text-muted-foreground text-xs md:text-sm hidden md:block">
+                    Welcome back, {user?.name || user?.email?.split('@')[0]}
+                </p>
             </div>
 
             <div className="flex items-center gap-4 ml-auto">
@@ -59,7 +61,9 @@ export function DashboardHeader() {
                     <DropdownMenuContent className="w-56" align="end" forceMount>
                         <DropdownMenuLabel className="font-normal">
                             <div className="flex flex-col space-y-1">
-                                <p className="text-sm font-medium leading-none">{user?.email?.split('@')[0]}</p>
+                                <p className="text-sm font-medium leading-none">
+                                    {user?.name || user?.email?.split('@')[0]}
+                                </p>
                                 <p className="text-xs leading-none text-muted-foreground">
                                     {user?.email}
                                 </p>
